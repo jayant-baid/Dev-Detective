@@ -117,8 +117,11 @@ function updateProfile(data) {
                 val2.previousElementSibling.style.opacity = 0.5;
                 return true;
             }
-            else
+            else{
+                val2.style.opacity = 1;
+                val2.previousElementSibling.style.opacity = 1;
                 return false;
+            }
         }
 
         avatar.src = `${data.avatar_url}`;
@@ -141,12 +144,24 @@ function updateProfile(data) {
         page.href = checkNull(data.blog, page) ? "" : data.blog;
         page.style.textDecoration = "none";
         twitter.textContent = checkNull(data.twitter_username, twitter) ? "Not Available" : data.twitter_username;
-        twitter.href = checkNull(data.twitter_username, twitter) ? "#" : `https://twitter.com/${data.twitter_username}`;
+        twitter.href = checkNull(data.twitter_username, twitter) ? "" : `https://twitter.com/${data.twitter_username}`;
+        twitter.style.textDecoration = "none";
         company.textContent = checkNull(data.company, company) ? "Not Available" : data.company;
 
         if (data.blog == "") {
             // console.log("Hello", page.href);
             page.style.pointerEvents = "none";
+        }
+        else{
+            page.style.pointerEvents = "all";
+        }
+        
+        if (data.twitter_username == null) {
+            // console.log("Hello", page.href);
+            twitter.style.pointerEvents = "none";
+        }
+        else {
+            twitter.style.pointerEvents = "all";
         }
     }
     else {
